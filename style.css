@@ -1,13 +1,13 @@
 body
 {
-  background-image: url("Images/graphicLibrary2.jpg");
+  background-image: url("Images/library3.jpg");
    /*filter: blur(8px);
    -webkit-filter: blur(8px);*/
 
 }
 
 /*.image
-{
+{l
 	background-image: url("Images/graphicLibrary2.jpg"); 
 }*/
 
@@ -15,6 +15,8 @@ body
 *{
 	box-sizing: border-box;
 }
+
+
 
 /*.focus
 {
@@ -108,9 +110,11 @@ body
 
 	margin-top: 30px;
 
+}
 
-
-
+.input2
+{
+	display: flex;
 }
 
 
@@ -121,7 +125,7 @@ body
 
 p
 {
-	color: white;
+	color: black;
 }
 
 .moncul
