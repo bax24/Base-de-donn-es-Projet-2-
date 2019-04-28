@@ -13,3 +13,9 @@ WHERE EXISTS
 			( SELECT * FROM articles 
 			WHERE articles.url = seconds_auteurs.url and articles.url= 'http://fake.url.com/0000003191.pdf') 
 AND seconds_auteurs.matricule = auteurs.matricule
+
+--Question D
+
+SELECT auteurs.matricule,nom, prenom FROM participations_conferences, auteurs WHERE participations_conferences.matricule NOT IN 
+	(SELECT participations_conferences.matricule FROM participations_conferences WHERE participations_conferences.tarif != "author fee" ) 
+AND auteurs.matricule = participations_conferences.matricule GROUP BY participations_conferences.matricule ORDER BY participations_conferences.matricule 
