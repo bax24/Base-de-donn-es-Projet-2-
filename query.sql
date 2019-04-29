@@ -19,3 +19,7 @@ AND seconds_auteurs.matricule = auteurs.matricule
 SELECT auteurs.matricule,nom, prenom FROM participations_conferences, auteurs WHERE participations_conferences.matricule NOT IN 
 	(SELECT participations_conferences.matricule FROM participations_conferences WHERE participations_conferences.tarif != "author fee" ) 
 AND auteurs.matricule = participations_conferences.matricule GROUP BY participations_conferences.matricule ORDER BY participations_conferences.matricule 
+
+--Question E
+SELECT  sujets_articles.sujet, COUNT(*) AS occ FROM sujets_articles, articles_conferences WHERE sujets_articles.url = articles_conferences.url 
+GROUP BY sujets_articles.sujet ORDER BY occ DESC /*Trouver les sujets de conférence les plus étudiés */
