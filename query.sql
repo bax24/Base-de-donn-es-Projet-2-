@@ -23,3 +23,7 @@ AND auteurs.matricule = participations_conferences.matricule GROUP BY participat
 --Question E
 SELECT  sujets_articles.sujet, COUNT(*) AS occ FROM sujets_articles, articles_conferences WHERE sujets_articles.url = articles_conferences.url 
 GROUP BY sujets_articles.sujet ORDER BY occ DESC /*Trouver les sujets de conférence les plus étudiés */
+
+SELECT participations_conferences.matricule, participations_conferences.nom_conference, COUNT(*) AS npart FROM participations_conferences 
+WHERE participations_conferences.annee_conference >= 2012 GROUP BY participations_conferences.nom_conference 
+ORDER BY npart DESC LIMIT 5 /*5 conférences les plus populaires depuis 2012*/
