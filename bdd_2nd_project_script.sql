@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS bdd_2nd_project;
-CREATE DATABASE bdd_2nd_project CHARACTER SET 'utf8';
+/*DROP DATABASE IF EXISTS bdd_2nd_project;
+CREATE DATABASE bdd_2nd_project CHARACTER SET 'utf8';*/
 
 Use bdd_2nd_project;
-
+-- remplacer le nom de la BDD par group22
 
 -- -----------------------------------
 -- ----- CREATION DES TABLES ---------
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS articles (
 	url CHAR(34) NOT NULL,
 	doi BIGINT NOT NULL,
 	titre TEXT,
-	date_publication DATE, -- Format jj/mm/aaaa et non aaaa/mm/jj
+	date_publication VARCHAR(10), -- Format jj/mm/aaaa et non aaaa/mm/jj
 	matricule_premier_auteur SMALLINT UNSIGNED NOT NULL,
 	PRIMARY KEY(url),
 	FOREIGN KEY(matricule_premier_auteur) REFERENCES auteurs(matricule)
@@ -102,6 +102,9 @@ CREATE TABLE IF NOT EXISTS participations_conferences (
 -- ----- INSERTION DES DONNEES -----
 -- ---------------------------------
 SET GLOBAL local_infile = 1;
+
+-- Remplacer les path par:
+-- /home/backes/WWW/Tables/nomFichierExempleTaGrandMere.csv
 
 LOAD DATA LOCAL INFILE 'C:/Users/Martin/Downloads/Test_SQL/revues.csv'
 INTO TABLE revues
@@ -162,11 +165,3 @@ INTO TABLE participations_conferences
 FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\n' -- ou '\r\n' selon l'ordinateur et le programme utilisés pour créer le fichier
 IGNORE 1 LINES;
-
-/*-- LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
-
-LOAD DATA LOCAL INFILE '/home/ngreffe/WWW/tables/emprunt.csv'
-INTO TABLE emprunt
-FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES;*/
