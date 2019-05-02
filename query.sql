@@ -33,14 +33,25 @@ GROUP BY participations_conferences.matricule
 ORDER BY participations_conferences.matricule 
 
 --Question E
-SELECT  sujets_articles.sujet, COUNT(*) AS occ 
-FROM sujets_articles, articles_conferences 
-WHERE sujets_articles.url = articles_conferences.url 
-GROUP BY sujets_articles.sujet 
-ORDER BY occ DESC /*Trouver les sujets de conférence les plus étudiés */
 
-SELECT participations_conferences.matricule, participations_conferences.nom_conference, COUNT(*) AS npart 
-FROM participations_conferences 
-WHERE participations_conferences.annee_conference >= 2012 
-GROUP BY participations_conferences.nom_conference 
-ORDER BY npart DESC LIMIT 5 /*5 conférences les plus populaires depuis 2012*/
+/*sujets de ces articles*/
+SELECT sujets_articles.sujet, COUNT(*) as occ
+FROM sujets_articles
+INNER JOIN(
+	/*articles présentés dans ces 5 conférences*/
+	SELECT articles_conferences.url, articles_conferences.nom_conference	
+	FROM articles_conferences
+	INNER JOIN(
+		/*5 conférences les plus populaires depuis 2012*/
+		SELECT participations_conferences.nom_conference, COUNT(*) AS npart 
+		FROM participations_conferences 
+		WHERE participations_conferences.annee_conference >= 2012 
+		GROUP BY participations_conferences.nom_conference 
+		ORDER BY npart DESC LIMIT 5 
+	) AS top_conf
+
+	ON articles_conferences.nom_conference = top_conf.nom_conference
+) AS top_articles
+ON sujets_articles.url = top_articles.url 
+GROUP BY sujets_articles.sujet
+ORDER BY occ DESC
