@@ -10,3 +10,7 @@ Choses à ne pas oublier :
     -Ne pas oublier de classer les dates par ordre décroissant pour la requête b
     -Plusieurs seconds auteurs pour le point b, utiliser la cmd que Boru le s m'a montrée pour les regrouper sur une ligne 
 
+login : group22
+
+mdp : PKuqfs3Ucm
+
