@@ -20,6 +20,22 @@ WHERE EXISTS
 		AND articles.url= 'http://fake.url.com/0000003191.pdf') 
 	AND seconds_auteurs.matricule = auteurs.matricule
 
+--Final version
+SELECT publications_chercheurs.titre, publications_chercheurs.date_publication, publications_chercheurs.type, GROUP_CONCAT(DISTINCT seconds_auteurs.matricule) AS matricules_seconds_auteurs
+FROM seconds_auteurs
+INNER JOIN(
+	SELECT articles.matricule_premier_auteur, articles.titre, articles.date_publication, 'articles de journal' AS type, articles.url
+	FROM articles, articles_journaux 
+	WHERE articles.url = articles_journaux.url 
+		AND articles.matricule_premier_auteur = 5 
+	UNION
+	SELECT articles.matricule_premier_auteur, articles.titre, articles.date_publication, 'articles de conférence' AS type, articles.url
+	FROM articles, articles_conferences 
+	WHERE articles.url = articles_conferences.url 
+		AND articles.matricule_premier_auteur = 5
+) AS publications_chercheurs
+ON publications_chercheurs.url = seconds_auteurs.url
+
 --Question D
 
 SELECT auteurs.matricule,nom, prenom 
